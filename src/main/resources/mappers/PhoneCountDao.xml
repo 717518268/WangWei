@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.PhoneCountDao">
+  <resultMap id="BaseResultMap" type="com.wang.pojo.PhoneCount">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+     
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+   
+     <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  
+ 
+  
+  <sql id="Base_Column_List">
+    pid,phone,count
+  </sql>
+  
+  
+  <!--查询所有  -->
+  <select id="selectAllPhoneCountList"  resultType="com.wang.pojo.PhoneCount">
+    select
+     
+    <include refid="Base_Column_List" />
+    from PhoneCount
+   
+  </select>
+  
+  
+  
+  
+  <!-- 根据gid查询 -->
+  <select id="selectByPhoneCountId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    
+    from PhoneCount
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  
+  
+  <!-- 根据gid查询 -->
+  <select id="selectByPhoneCountPhoneValue" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    
+    from PhoneCount
+    where phone = #{phone}
+  </select>
+  <!-- 根据gid删除 -->
+  <delete id="deletePhoneCountGId" parameterType="java.lang.Integer">
+    delete from PhoneCount
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+   
+  <insert id="insertPhoneCount" parameterType="com.wang.pojo.PhoneCount">
+    insert into PhoneCount (phone,count)
+    values (#{phone},#{count}
+     )
+  </insert>
+  
+  <select id="countPhoneCount"   resultType="java.lang.Integer">
+    select count(*) from PhoneCount
+   
+  </select>
+ 
+    
+  <!-- 修改数量 -->
+  <update id="updatePhoneCount" parameterType="com.wang.pojo.PhoneCount">
+  	  update PhoneCount
+    set  
+      count =#{count}
+       
+    where pid=#{pid,jdbcType=INTEGER}
+  
+  </update>
+  
+  
+</mapper>

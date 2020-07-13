@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.GiftDao">
+  <resultMap id="BaseResultMap" type="com.wang.pojo.Gift">
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="contentname" jdbcType="VARCHAR" property="contentname" />
+     <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+     <result column="time" jdbcType="VARCHAR" property="time" />
+     <result column="uid" jdbcType="INTEGER" property="uid" />
+  </resultMap>
+ 
+  <resultMap id="BaseResultMapUser" type="com.wang.pojo.Gift">
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="contentname" jdbcType="VARCHAR" property="contentname" />
+     <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+     <result column="time" jdbcType="VARCHAR" property="time" />
+     <result column="uid" jdbcType="INTEGER" property="uid" />
+	     <association property="user" javaType="com.wang.pojo.User">
+	        <id column="uid" jdbcType="INTEGER" property="uid" />
+		    <result column="phone" jdbcType="VARCHAR" property="phone" />
+		    <result column="name" jdbcType="VARCHAR" property="name" />
+		    <result column="gid" jdbcType="VARCHAR" property="gid" />  
+	     </association>	     
+  </resultMap>
+ 
+ <select id="selectGiftDaoOneUser" resultMap="BaseResultMapUser">
+    select g.gid,g.title,g.contentname,g.image,g.count,g.time,g.uid,
+   	 u.uid,u.phone,u.name,u.gid
+     from gift g,user u
+     where g.uid =u.uid and g.gid=#{gid}
+</select>
+ 
+  <sql id="Base_Column_List">
+    gid,title,contentname, image,count,time,uid
+  </sql>
+  
+  
+  <!--查询所有  -->
+  <select id="selectAllGiftList"  resultType="com.wang.pojo.Gift">
+    select
+     
+    <include refid="Base_Column_List" />
+    from gift
+   
+  </select>
+  
+  <!-- 根据gid查询 -->
+  <select id="selectByGiftGId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    
+    from gift
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  <!-- 根据gid删除 -->
+  <delete id="deleteByGiftGId" parameterType="java.lang.Integer">
+    delete from gift
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+   
+  <insert id="insertGift" parameterType="com.wang.pojo.Gift">
+    insert into gift (title,contentname, image,count,time,uid)
+    values (#{title},#{contentname},#{image},
+     #{count},#{time},
+     #{uid}
+     )
+  </insert>
+  
+  <select id="countByGift"   resultType="java.lang.Integer">
+    select count(*) from gift
+   
+  </select>
+ 
+  <!--默认0， 修改对应用户的uid -->
+  <update id="updateGiftGid" parameterType="com.wang.pojo.Gift">
+    update gift
+    set  
+      uid =#{uid}
+       
+    where gid=#{gid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 修改数量 -->
+  <update id="updateGiftCount" parameterType="com.wang.pojo.Gift">
+  	  update gift
+    set  
+      count =#{count}
+       
+    where gid=#{gid,jdbcType=INTEGER}
+  
+  </update>
+  
+  
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wang.dao.AdvertisingMapper" >
+  <resultMap id="BaseResultMap" type="com.wang.pojo.Advertising" >
+    <id column="advertisingid" property="advertisingid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+     <result column="imageurl" property="imageurl" jdbcType="LONGVARCHAR" />
+    <result column="hrefurl" property="hrefurl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    advertisingid, title,imageurl, hrefurl
+  </sql>
+  
+   
+ 
+  <select id="selectAdvertisingList" resultType="com.wang.pojo.Advertising">
+    select 
+    <include refid="Base_Column_List" />
+    
+    from advertising
+  </select>
+  
+  <delete id="deleteAdvertisingId" parameterType="java.lang.Integer" >
+    delete from advertising
+    where advertisingid = #{advertisingid,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insertAdvertising" parameterType="com.wang.pojo.Advertising" >
+    insert into advertising ( title, imageurl, 
+      hrefurl)
+    values ( #{title,jdbcType=VARCHAR}, #{imageurl,jdbcType=LONGVARCHAR}, 
+      #{hrefurl,jdbcType=LONGVARCHAR})
+  </insert>
+  
+</mapper>

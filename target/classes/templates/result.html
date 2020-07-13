@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>云顶社区奖池页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+ 
+ 
+
+<body class="gray-bg" ng-app='app' ng-controller='resultController'>
+
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="ibox">
+                    
+                    <div class="ibox-content">
+                        <div class="row m-b-sm m-t-sm">
+                            <div class="col-md-1">
+                                <a   class="btn btn-white btn-sm" href="/Wang-Book/index" ><i class="fa fa-refresh"></i> 返回</a>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="input-group">
+                                    <input type="text" placeholder="请输入手机号" class="input-sm form-control" ng-model="phone"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary" ng-click="seacherPhone()"> 搜索</button> </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-list">
+							{{error}}
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr ng-repeat='comment in commentArr track by $index'>
+                                        <td class="project-status">
+                                           
+                                        </td>
+                                        <td class="project-people">
+                                        
+                                        <span>{{comment.contentname}}</span>
+                                            <img alt="image" class="img-circle" src="{{comment.image}}"> 
+                                            数量是：{{comment.count}} 
+                                        </td>
+                                        <td class="project-title">
+                                             用户：{{comment.user.name}} ,电话：{{comment.user.phone}}
+                                            <br/>
+                                            <small>{{comment.time}}</small>
+                                        </td>
+                                   
+                                         
+                                        <td class="project-actions">
+                                           
+                                        </td>
+                                    </tr>
+                               
+                                     <tr >
+                                        <td class="project-status">
+                                           
+                                        </td>
+                                        <td class="project-people">
+                                        
+                                        <span>{{userorder.contentname}}</span>
+                                             <img alt="image" class="img-circle" src="{{userorder.image}}"> 
+                                             数量是：{{userorder.count}} 
+                                        </td>
+                                        <td class="project-title">
+                                             用户：{{userorder.user.name}} ,电话：{{userorder.user.phone}} 
+                                            <br/>
+                                            <small>{{userorder.time}}</small>
+                                        </td>
+                                   
+                                         
+                                        <td class="project-actions">
+                                           
+                                        </td>
+                                    </tr>
+           
+                                
+                               
+                                    </tbody>
+                                </table>
+                            </div>
+                             <script type="text/javascript" src="js/angular.js"></script>
+                            <script type="text/javascript">
+                            var app=angular.module('app',[]);
+                        	app.controller('resultController',['$scope','$http',function($scope,$http){
+                        		
+                        		 
+                        			 $scope.loding=function(){
+                        				 
+                        			  
+                        			//加载列表
+                            		$http({
+                             			method:'GET',
+                                		 url:'/Wang-Book/getResultAll',
+                                		headers:{
+                                			"Content-Type":'application/x-www-form-urlencoded'
+                                		},
+                                		//params:data1,	//angular用此传值
+                             			}).success(function(data){
+                             				//alert("成功00");
+                             				 
+                             				$scope.commentArr=data;
+                             			});
+                        			 }
+                        			 $scope.loding();
+                        			$scope.reload=function(){
+                        				 $scope.loding();
+                        			 }
+                        			 
+                        	 	$scope.seacherPhone=function(){
+                        	 		var phone=$scope.phone;
+                        	 		var data1={phone:phone};
+                        	 		//加载列表
+                            		$http({
+                             			method:'GET',
+                                		 url:'/Wang-Book/sendPhoneByUser',
+                                		headers:{
+                                			"Content-Type":'application/x-www-form-urlencoded'
+                                		},
+                                		params:data1,	//angular用此传值
+                             			}).success(function(data){
+                             				 
+                             				if(data==null){
+                             					$scope.error="查无结果";
+                             				}else{
+                             					
+                             					$scope.userorder=data;
+                             				}
+                             				 
+                             			});
+                        	 	}
+                        		 
+                        		
+                        	}]);
+                            
+
+                            </script>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+
+    <script>
+        $(document).ready(function(){
+
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+
+                // Ajax example
+//                $.ajax().always(function () {
+//                    simpleLoad($(this), false)
+//                });
+
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+    </script>
+
+     <style>
+		    /*----------------------------------------
+		    页脚
+		    ------------------------------------*/
+		footer {
+		    background: #333;
+		    color: #eee;
+		    font-size: 11px;
+		    padding: 20px;
+		}
+		ul.unstyled {
+		    list-style: none;
+		    padding: 0;
+		}
+		footer h6 {
+		    color: white;
+		}    
+    </style>
+	  <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">
+                    <h6>Copyright &copy;新浪体育</h6>
+                </div>
+                
+                <div class="col-xs-4">
+                    <h6>关于我们</h6>
+                    <p>
+                        中国上海/2014年8月14未经审计的财务报告。
+                    </p>
+                </div>
+                
+                <div class="col-xs-3">
+                     
+                    <ul class="unstyled">
+                         
+                        <li><a href="http://beian.miit.gov.cn">粤ICP备19049078</a></li>
+                    </ul>
+                </div>
+                
+               
+                
+                <div class="col-sm-2">
+                    <h6>本网站由<span class="glyphicon glyphicon-heart"></span>Darren制作</h6>
+                </div>
+            </div>
+        </div>
+    </footer><!--页脚结束-->
+ 
+    
+
+    </body>
+</html>

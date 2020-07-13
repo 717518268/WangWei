@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>云顶活动首页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg" ng-app='app' ng-controller='mainController'>
+ 
+	 	<header class="vc-header">
+	        <nav class="navbar navbar-default" data-spy="affix" data-offset-top="80">
+	            <div class="container">
+	                <div class="navbar-header">
+	                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#vmenu">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                    </button>
+	                    <a class="navbar-brand" href="/wang/Wang-Service-Web">
+	                        <h2 class="vc-logo">去快乐源泉</h2>
+	                    </a>
+	                </div>
+	
+	                <div class="collapse navbar-collapse" id="vmenu">
+	                    <ul class="nav navbar-nav navbar-right">
+	                        <li class="active"><a href="/wang/Wang-Service-Web">首页 <span class="sr-only">(current)</span></a>
+	                        </li>
+	                        <li><a href="/wang/Wang-Service-Web/ranking">排行榜</a>
+	                        </li>
+	                        <li><a href="/wang/Wang-Service-User">个人中心</a>
+	                        </li>
+	                        <li><a href="/wang/Wang-Service-Management">发布快乐源泉</a>
+	                        </li>
+	                        <li><a href="/wang/Wang-Book">活动</a>
+	                        </li>
+	                        <li class="dropdown">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">更多可能 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu" role="menu">
+	                                <li><a href="/wang/Wang-Service-EmailLogin/register">邮箱注册</a>
+	                                </li>
+	                                <li><a href="/wang/Wang-Service-EmailLogin/login">邮箱登录</a>
+	                                </li> 
+	                                <li class="divider"></li>
+	                                <li><a href="/wang/Wang-Service-PhoneLogin/register">短信注册</a>
+	                                </li>
+	                                <li><a href="/wang/Wang-Service-PhoneLogin/login">短信登录</a>
+	                                </li>
+	                                 
+	                            </ul>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </nav>
+	    </header>
+	<!-- 头部导航end -->
+	 
+	 
+	 
+	 
+	 
+	
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row"  >
+        
+         <div class="col-sm-4" ng-repeat='comment in commentArr track by $index'>
+                <div class="contact-box">
+                    <a href="###">
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <img  class="img-circle m-t-xs img-responsive" src='{{comment.image}}'/>
+                                <div class="m-t-xs font-bold">{{comment.title}}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <h3><strong>{{comment.contentname}}</strong></h3>
+                            <p><i class="fa fa-map-marker"></i> 全国通发</p>
+                            <address>
+                            <strong>数量:</strong>
+                            {{comment.count}}<br>
+                          
+                            <abbr title="Phone"> {{comment.time}}
+                        </address>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+             
+              
+            <!--  -->
+        </div>
+    </div>
+   
+    
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+             <div class="col-sm-2"></div>
+            <div class="col-sm-7">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>赶紧获取礼物吧</h5>
+                         <h5>活动次数还剩：{{count}}</h5>
+                         <h5>{{message1}}</h5>
+                        
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">手机号：</label>
+
+                                <div class="col-xs-8">
+                                    <input type="text" placeholder="手机号" ng-model="phone" class="form-control"> 
+                                    <span class="help-block m-b-none">{{messagephone}}</span>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="col-xs-3 control-label">名字：</label>
+
+                                <div class="col-xs-8">
+                                    <input type="text" placeholder="名字" ng-model="name" class="form-control"> 
+                                    <span class="help-block m-b-none"> {{messagename}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">验证码：</label>
+                                <div class="col-xs-5">
+                                    <input type="text" placeholder="验证码" ng-model="phoneCode" class="form-control"> 
+                                     <span class="help-block m-b-none">{{messagecode}}</span>
+                                </div>
+                                <div class="col-xs-2" style="padding-bottom: 10px;top: -15px;">
+                                      <button class="btn btn-primary m-t" type="button" ng-disabled="mySwitch" ng-click='getPhoneCode()'>获取验证码<span id="second"></span> </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-offset-3 col-xs-8">
+                                    <button class="btn btn-sm btn-info" ng-click="chenckEnd()" ng-disabled="endSubmint" type="button">提交</button>
+                                      <a   class="btn btn-white btn-sm" href="/Wang-Book/result" ><i class="fa fa-refresh"></i>前往抽奖结果页面</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+            </div>
+            
+            
+            
+            
+            
+            
+            
+             <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+           	<div class="col-sm-3"></div>
+            <div class="col-sm-4">
+                <div class="contact-box">
+                    <a href="{{advesHrefurl}}" title="这是一条来自淘宝的广告">
+                        <div class="col-sm-6">
+                            <div class="text-center">
+                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{advesImageurl}}">
+                                <div class="m-t-xs font-bold">来自某宝网...</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            
+                            <p><i class="fa fa-map-marker"></i> {{advestitle}}</p>
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+            
+              <script type="text/javascript" src="js/angular.js"></script>
+	 <!-- 加载js文件 -->
+        <script type="text/javascript" src="js/myAngulas.js" ></script>
+        
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+ <style>
+		    /*----------------------------------------
+		    页脚
+		    ------------------------------------*/
+		footer {
+		    background: #333;
+		    color: #eee;
+		    font-size: 11px;
+		    padding: 20px;
+		}
+		ul.unstyled {
+		    list-style: none;
+		    padding: 0;
+		}
+		footer h6 {
+		    color: white;
+		}    
+    </style>
+	  <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">
+                    <h6>Copyright &copy;软件协会</h6>
+                </div>
+                
+                <div class="col-xs-4">
+                    <h6>关于我们</h6>
+                    <p>
+                       由软件协会提供技术支持
+                    </p>
+                </div>
+                
+                <div class="col-xs-3">
+                     
+                    <ul class="unstyled">
+                         
+                        <li><a href="http://beian.miit.gov.cn" title='备案号'>粤ICP备19049078</a></li>
+                    </ul>
+                </div>
+                
+               
+                
+                <div class="col-sm-2">
+                    <h6>本网站由<span class="glyphicon glyphicon-heart"></span>Darren制作</h6>
+                </div>
+            </div>
+        </div>
+    </footer><!--页脚结束-->
+ 
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.RootUserDao">
+  <resultMap id="BaseResultMap" type="com.wang.pojo.RootUser">
+    <id column="id" jdbcType="INTEGER" property="id" />  
+     <result column="username" jdbcType="VARCHAR" property="username" />
+     <result column="atckass" jdbcType="VARCHAR" property="atckass" />
+     <result column="messagecount" jdbcType="INTEGER" property="messagecount" />
+  </resultMap>
+  
+ 
+  
+  <sql id="Base_Column_List">
+    id,username,atckass,messagecount
+  </sql>
+  
+  
+  
+  <!-- 根据gid查询 -->
+  <select id="selectByRootUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    
+    from rootuser
+    where username = #{username}
+  </select>
+  
+ 
+   
+   <!-- 修改短信数量 -->
+  <update id="uMessagentCount" parameterType="com.wang.pojo.RootUser">
+  	  update rootuser
+    set  
+      messagecount =#{messagecount}
+       
+    where id=#{id,jdbcType=INTEGER}
+  
+  </update>
+ 
+    
+  <!-- 修改数量 -->
+  <update id="updateMessagent" parameterType="com.wang.pojo.RootUser">
+  	  update rootuser
+    set  
+      atckass =#{atckass}
+       
+    where id=#{id,jdbcType=INTEGER}
+  
+  </update>
+  
+  
+</mapper>

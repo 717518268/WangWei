@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> 云顶添加物品页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <style>
+        .droppable-active {
+            background-color: #ffe !important;
+        }
+
+        .tools a {
+            cursor: pointer;
+            font-size: 80%;
+        }
+
+        .form-body .col-md-6,
+        .form-body .col-md-12 {
+            min-height: 400px;
+        }
+
+        .draggable {
+            cursor: move;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+
+        <div class="row">
+			<div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>  <a href="/Wang-Book/timeline" class="btn btn-primary">返回</a></h5>
+                        
+                    </div>
+                    <div class="ibox-content">
+                        <div class="alert alert-info">
+                            添加一个新的物品
+                        </div>
+                        <form role="form" class="form-horizontal m-t" action="/Wang-Book/uploadFile" method="post" enctype="multipart/form-data">
+                            <div class="form-group draggable">
+                                <label class="col-sm-3 control-label"> 标题：</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="title" class="form-control" placeholder=" 标题">
+                                    <span class="help-block m-b-none">  </span>
+                                </div>
+                            </div>
+                            <div class="form-group draggable">
+                                <label class="col-sm-3 control-label">物品介绍</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="contentname" placeholder=" ">
+                                </div>
+                            </div>
+                             
+                            
+                            <div class="form-group draggable">
+                                <label class="col-sm-3 control-label">图片</label>
+                                <div class="col-sm-9">
+                                    <input type="file" name="fileName"  >
+                                </div>
+                            </div>
+                        
+                           <div class="form-group draggable">
+                                <label class="col-sm-3 control-label">数量</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="count" placeholder=" ">
+                                </div>
+                            </div>
+                            
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group draggable">
+                                <div class="col-sm-12 col-sm-offset-3">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="reset">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+             
+        </div>
+
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    <!-- jQuery UI -->
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+
+    <!-- From Builder -->
+    <script src="js/plugins/beautifyhtml/beautifyhtml.js"></script>
+ <style>
+		    /*----------------------------------------
+		    页脚
+		    ------------------------------------*/
+		footer {
+		    background: #333;
+		    color: #eee;
+		    font-size: 11px;
+		    padding: 20px;
+		}
+		ul.unstyled {
+		    list-style: none;
+		    padding: 0;
+		}
+		footer h6 {
+		    color: white;
+		}    
+    </style>
+	  <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">
+                    <h6>Copyright &copy;新浪体育</h6>
+                </div>
+                
+                <div class="col-xs-4">
+                    <h6>关于我们</h6>
+                    <p>
+                        中国上海/2014年8月14未经审计的财务报告。
+                    </p>
+                </div>
+                
+                <div class="col-xs-3">
+                     
+                    <ul class="unstyled">
+                         
+                        <li><a href="http://beian.miit.gov.cn">粤ICP备19049078</a></li>
+                    </ul>
+                </div>
+                
+               
+                
+                <div class="col-sm-2">
+                    <h6>本网站由<span class="glyphicon glyphicon-heart"></span>Darren制作</h6>
+                </div>
+            </div>
+        </div>
+    </footer><!--页脚结束-->
+ 
+
+    
+
+    
+    
+</body>
+
+</html>
